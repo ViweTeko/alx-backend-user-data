@@ -5,7 +5,7 @@ import re
 from logging import Logger, INFO, LogRecord, Formatter
 from mysql.connector import connect, connection
 from typing import List
-
+import logging
 
 patterns = {
     'extract': lambda x, y: r'(?P<field>{})=[^{}]*'.format('|'.join(x), y),
@@ -79,7 +79,7 @@ class RedactingFormatter(Formatter):
         super(RedactiongFromatter, self).__init__(self.FORMAT)
         self.fields = fields
     
-    def format(self, record, LogRecord) -> str:
+    def format(self, record: LogRecord) -> str:
         """Formats LogRecord"""
         msg = super(RedactingFormatter, self).format(record)
         text = filter_datum(self.fields, self.REDACTION, msg, self.SEPARATOR)
