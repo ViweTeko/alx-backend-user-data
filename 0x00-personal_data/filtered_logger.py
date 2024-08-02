@@ -61,7 +61,7 @@ def main():
         rows = cursor.fetchall()
         for row in rows:
             record = map(lambda x: f'{x[0]}={x[1]}', zip(columns, row),)
-            message = f'{'; '.join(list(record))}'
+            message = '{}'.format('; '.join(list(record)))
             args = ("user_data", INFO, None, None, message, None, None)
             log_record = LogRecord(*args)
             info_logger.handle(log_record)
