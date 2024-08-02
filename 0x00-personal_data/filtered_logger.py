@@ -76,7 +76,7 @@ class RedactingFormatter(Formatter):
     SEPARATOR = ";"
 
     def __init__(self, fields: List[str]):
-        super(RedactiongFromatter, self).__init__(self.FORMAT)
+        super(RedactingFromatter, self).__init__(self.FORMAT)
         self.fields = fields
     
     def format(self, record: LogRecord) -> str:
