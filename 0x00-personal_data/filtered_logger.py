@@ -8,7 +8,7 @@ from typing import List
 
 
 patterns = {
-    'extract': lambda x, y: rf'(?P<field>{'|'.join(x)})=[^{y}]*',
+    'extract': lambda x, y: r'(?P<field>{})=[^{}]*'.format('|'.join(x), y),
     'replace': lambda x: rf'\g<field>={x}',
 }
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
