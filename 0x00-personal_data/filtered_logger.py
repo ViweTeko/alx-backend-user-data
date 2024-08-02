@@ -7,6 +7,7 @@ from mysql.connector import connect, connection
 from typing import List
 import logging
 
+
 patterns = {
     'extract': lambda x, y: r'(?P<field>{})=[^{}]*'.format('|'.join(x), y),
     'replace': lambda x: rf'\g<field>={x}',
@@ -60,7 +61,9 @@ def main():
         cursor.execute(query)
         rows = cursor.fetchall()
         for row in rows:
-            record = map(lambda x: f'{x[0]}={x[1]}', zip(columns, row),)
+            record = map(
+                lambda x: f'{x[0]}={x[1]}', zip(columns, row),
+            )
             message = '{}'.format('; '.join(list(record)))
             args = ("user_data", INFO, None, None, message, None, None)
             log_record = LogRecord(*args)
