@@ -16,7 +16,8 @@ PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
 
 def filter_datum(
-    fields: List[str], redaction: str, message: str, separator: str,) -> str:
+        fields: List[str], redaction: str, message: str, separator: str,
+) -> str:
     """Filters log line"""
     extract, replace = (patterns["extract"], patterns["replace"])
     return re.sub(extract(fields, separator), replace(redaction), message)
@@ -36,7 +37,6 @@ def get_db() -> connection.MySQLConnection:
         database=db_name,
     )
     return connection
-    
 
 
 def get_logger() -> Logger:
@@ -81,7 +81,7 @@ class RedactingFormatter(Formatter):
     def __init__(self, fields: List[str]):
         super(RedactingFromatter, self).__init__(self.FORMAT)
         self.fields = fields
-    
+
     def format(self, record: LogRecord) -> str:
         """Formats LogRecord"""
         msg = super(RedactingFormatter, self).format(record)
