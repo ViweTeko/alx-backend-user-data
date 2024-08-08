@@ -20,15 +20,15 @@ class Base():
         if DATA.get(s_class) is None:
             DATA[s_class] = {}
 
-        self.id = kwargs.get('id',(uuid4()))
+        self.id = kwargs.get('id', (uuid4()))
         if kwargs.get('created_at') is not None:
-            self.created_at = datetime.strptime(kwargs.get('created_at'),
-            TIMESTAMP_FORMAT)
+            self.created_at = datetime.strptime(
+                kwargs.get('created_at'), TIMESTAMP_FORMAT)
         else:
             self.created_at = datetime.utcnow()
         if kwargs.get('updated_at') is not None:
-            self.updated_at = datetime.strptime(kwargs.get('updated_at'),
-            TIMESTAMP_FORMAT)
+            self.updated_at = datetime.strptime(
+                kwargs.get('updated_at'), TIMESTAMP_FORMAT)
         else:
             self.updated_at = datetime.utcnow()
 
@@ -111,6 +111,7 @@ class Base():
             def search(cls, attributes: dict = {}) -> List[TypeVar('Base')]:
                 """Searches all objects with matching attributes"""
                 s_class = cls.__name__
+                
                 def _search(obj):
                     if len(attributes) == 0:
                         return True
