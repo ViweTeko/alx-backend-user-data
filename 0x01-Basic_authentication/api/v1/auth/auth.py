@@ -13,7 +13,7 @@ class Auth:
             return request.headers.get('Authorization', None)
         return None
 
-    def current_user(self, request=None) -> TpyeVar('User'):
+    def current_user(self, request=None) -> TypeVar('User'):
         """Gets current user"""
         return None
 
