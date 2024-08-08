@@ -21,7 +21,7 @@ class User(Base):
         if pwd is None or type(pwd) is not str:
             self._password = None
         else:
-            self._password = hashlib.sha256(pwd.encode()).hexidigest().lower()
+            self._password = hashlib.sha256(pwd.encode()).hexdigest().lower()
 
     @property
     def password(self) -> str:
@@ -35,7 +35,7 @@ class User(Base):
         if self.password is None:
             return False
         pwd_e = pwd.encode()
-        return hashlib.sha256(pwd_e).hexidigest().lower() == self.password
+        return hashlib.sha256(pwd_e).hexdigest().lower() == self.password
 
     def display_name(self) -> str:
         """Displays Username based on email/first_name/last_name"""
