@@ -56,7 +56,7 @@ class BasicAuth(Auth):
         if type(user_email) == str and type(user_pwd) == str:
             try:
                 users = User.search({'email': user_email})
-            exception Exception:
+            except Exception:
                 return None
             if len(users) <= 0:
                 return None
