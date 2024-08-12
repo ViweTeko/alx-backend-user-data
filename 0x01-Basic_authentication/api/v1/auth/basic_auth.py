@@ -11,11 +11,11 @@ from models.user import User
 class BasicAuth(Auth):
     """Basic authentication class"""
     def extract_base64_authorization_header(
-        self, auhtorization_header: str
+        self, authorization_header: str
     ) -> str:
         """Extracts base64 part of authorization header"""
         if type(authorization_header) == str:
-            pattern = r'Basic (?<token>.+)'
+            pattern = r'Basic (?P<token>.+)'
             field_match = re.fullmatch(pattern, authorization_header.strip())
             if field_match is not None:
                 return field_match.group('token')
@@ -68,7 +68,7 @@ class BasicAuth(Auth):
         """Retrieves user"""
         auth_header = self.authorization_header(request)
         b64_auth_token = self.extract_base64_authorization_header(auth_header)
-        auth_token = self.decode_bae64_authorization_header(b64_auth_token)
+        auth_token = self.decode_base64_authorization_header(b64_auth_token)
         email, password = self.extract_user_credentials(auth_token)
 
         return self.user_object_from_credentials(email, password)
