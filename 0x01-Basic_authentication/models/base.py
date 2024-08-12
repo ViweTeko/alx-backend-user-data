@@ -4,7 +4,7 @@ from datetime import datetime
 from uuid import uuid4
 import json
 from os import path
-fro typing import List, TypeVar, Iterable
+from typing import List, TypeVar, Iterable
 
 
 DATA = {}
