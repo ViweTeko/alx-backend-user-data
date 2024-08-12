@@ -87,7 +87,7 @@ class Base():
     def load_from_file(cls):
         """Loads all objects from file"""
         s_class = cls.__name__
-        file_path = f".db_{s_class}.json"
+        file_path = ".db_{}.json".format(s_class)
         DATA[s_class] = {}
         if not path.exists(file_path):
             return
@@ -100,7 +100,7 @@ class Base():
     def save_to_file(cls):
         """ Saves all objects to file"""
         s_class = cls.__name__
-        file_path = f".db_{s_class}.json"
+        file_path = ".db_{}.json".format(s_class)
         objs_json = {}
         for o_id, obj in DATA[s_class].items():
             objs_json[o_id] = obj.to_json(True)
