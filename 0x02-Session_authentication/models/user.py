@@ -15,6 +15,11 @@ class User(Base):
         self.first_name = kwargs.get('first_name')
         self.last_name = kwargs.get('last_name')
 
+    @property
+    def password(self) -> str:
+        """Getter of password"""
+        return self._password
+
     @password.setter
     def password(self, pwd: str):
         """ Setter of new pwd in SHA256 encryption"""
@@ -22,11 +27,6 @@ class User(Base):
             self._password = None
         else:
             self._password = hashlib.sha256(pwd.encode()).hexdigest().lower()
-
-    @property
-    def password(self) -> str:
-        """Getter of password"""
-        return self._password
 
     def is_valid_password(self, pwd: str) -> bool:
         """Validates password"""
