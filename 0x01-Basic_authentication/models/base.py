@@ -96,27 +96,27 @@ class Base():
             for o_id, o_json in objs_json.items():
                 DATA[s_class][o_id] = cls(**o_json)
 
-        @classmethod
-        def save_to_file(cls):
-            """ Saves all objects to file"""
-            s_class = cls.__name__
-            file_path = f".db_{s_class}.json"
-            objs_json = {}
-            for o_id, obj in DATA[s_class].items():
-                objs_json[o_id] = obj.to_json(True)
-            with open(file_path, 'w') as f:
-                json.dump(objs_json, f)
+    @classmethod
+    def save_to_file(cls):
+        """ Saves all objects to file"""
+        s_class = cls.__name__
+        file_path = f".db_{s_class}.json"
+        objs_json = {}
+        for o_id, obj in DATA[s_class].items():
+            objs_json[o_id] = obj.to_json(True)
+        with open(file_path, 'w') as f:
+            json.dump(objs_json, f)
 
-            @classmethod
-            def search(cls, attributes: dict = {}) -> List[TypeVar('Base')]:
-                """Searches all objects with matching attributes"""
-                s_class = cls.__name__
-                
-                def _search(obj):
-                    if len(attributes) == 0:
-                        return True
-                    for key, val in attributes.items():
-                        if (getattr(obj, key) != val):
-                            return False
-                    return True
-                return list(filter(_search, DATA[s_class].values()))
+    @classmethod
+    def search(cls, attributes: dict = {}) -> List[TypeVar('Base')]:
+        """Searches all objects with matching attributes"""
+        s_class = cls.__name__
+        
+        def _search(obj):
+            if len(attributes) == 0:
+                return True
+            for key, val in attributes.items():
+                if (getattr(obj, key) != val):
+                    return False
+            return True
+        return list(filter(_search, DATA[s_class].values()))
