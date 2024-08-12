@@ -52,6 +52,30 @@ class Base():
                 result[key] = val
         return result
 
+    @classmethod
+    def load_from_file(cls):
+        """Loads all objects from file"""
+        s_class = cls.__name__
+        file_path = ".db_{}.json".format(s_class)
+        DATA[s_class] = {}
+        if not path.exists(file_path):
+            return
+        with open(file_path, 'r') as f:
+            objs_json = json.load(f)
+            for o_id, o_json in objs_json.items():
+                DATA[s_class][o_id] = cls(**o_json)
+
+    @classmethod
+    def save_to_file(cls):
+        """ Saves all objects to file"""
+        s_class = cls.__name__
+        file_path = ".db_{}.json".format(s_class)
+        objs_json = {}
+        for o_id, obj in DATA[s_class].items():
+            objs_json[o_id] = obj.to_json(True)
+        with open(file_path, 'w') as f:
+            json.dump(objs_json, f)
+
     def save(self):
         """Saves current object"""
         s_class = self.__class__.__name__
@@ -82,30 +106,6 @@ class Base():
         """Returns one object by ID"""
         s_class = cls.__name__
         return DATA[s_class].get(id)
-
-    @classmethod
-    def load_from_file(cls):
-        """Loads all objects from file"""
-        s_class = cls.__name__
-        file_path = ".db_{}.json".format(s_class)
-        DATA[s_class] = {}
-        if not path.exists(file_path):
-            return
-        with open(file_path, 'r') as f:
-            objs_json = json.load(f)
-            for o_id, o_json in objs_json.items():
-                DATA[s_class][o_id] = cls(**o_json)
-
-    @classmethod
-    def save_to_file(cls):
-        """ Saves all objects to file"""
-        s_class = cls.__name__
-        file_path = ".db_{}.json".format(s_class)
-        objs_json = {}
-        for o_id, obj in DATA[s_class].items():
-            objs_json[o_id] = obj.to_json(True)
-        with open(file_path, 'w') as f:
-            json.dump(objs_json, f)
 
     @classmethod
     def search(cls, attributes: dict = {}) -> List[TypeVar('Base')]:
