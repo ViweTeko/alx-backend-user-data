@@ -62,7 +62,7 @@ class DB:
         update_source = {}
         for key, val in kwargs.items():
             if hasattr(User, key):
-                update_source[getattr(User, key)] = value
+                update_source[getattr(User, key)] = val
             else:
                 raise ValueError()
         self._session.query(User).filter(User.id == user.id).update(

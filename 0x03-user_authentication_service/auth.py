@@ -10,7 +10,7 @@ from db import DB
 
 def _hash_password(password: str) -> bytes:
     """Hashes password"""
-    return bcrypt.hashpw(password.encode("utf-8"). bcrypt.gensalt())
+    return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
 
 
 def _generate_uuid() -> str:
