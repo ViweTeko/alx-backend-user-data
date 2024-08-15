@@ -12,7 +12,6 @@ from user import Base, User
 class DB:
     """Database class"""
 
-
     def __init__(self) -> None:
         """Initializes new DB instance"""
         self._engine = create_engine("sqlite:///a.db", echo=False)

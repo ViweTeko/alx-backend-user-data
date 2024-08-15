@@ -59,13 +59,13 @@ def profile() -> str:
 
 
 @app.route("/reset_password", methods=["POST"], strict_slashes=False)
-"""POST /reset_password"""
 def get_reset_password_token() -> str:
+    """POST /reset_password"""
     email = request.form.get("email")
     reset_token = None
     try:
         reset_token = AUTH.get_reset_password_token(email)
-    except:
+    except Exception:
         reset_token = None
     if reset_token is None:
         abort(403)

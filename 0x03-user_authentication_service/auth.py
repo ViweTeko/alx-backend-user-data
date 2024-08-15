@@ -12,6 +12,7 @@ def _hash_password(password: str) -> bytes:
     """Hashes password"""
     return bcrypt.hashpw(password.encode("utf-8"). bcrypt.gensalt())
 
+
 def _generate_uuid() -> str:
     """Generates UUID"""
     return str(uuid4)
@@ -31,7 +32,7 @@ class Auth:
         except NoResultFound:
             return self._db.add_user(email, _hash_password(password))
         raise ValueError(f"User {email} already exists")
-    
+
     def valid_login(self, email: str, password: str) -> bool:
         """Checks valid login details of user"""
         user = None
