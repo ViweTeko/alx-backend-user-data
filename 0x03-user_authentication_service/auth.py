@@ -15,7 +15,7 @@ def _hash_password(password: str) -> bytes:
 
 def _generate_uuid() -> str:
     """Generates UUID"""
-    return str(uuid4)
+    return str(uuid4())
 
 
 class Auth:
@@ -102,6 +102,6 @@ class Auth:
         new_pwd_hash = _hash_password(password)
         self._db.update_user(
             user.id,
-            hased_password=new_pwd_hash,
+            hashed_password=new_pwd_hash,
             reset_token=None,
         )
